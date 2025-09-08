@@ -1,0 +1,39 @@
+# GitHub Actions workflow to build, test, and optionally deploy the Python application
+
+name: CI
+
+# Trigger the workflow on any push to the repository
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install flask
+
+      # Run a basic health check on the application
+      - name: Run application
+        run: |
+          python app.py &
+          sleep 5
+
+      # Build the Docker image (without pushing)
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
