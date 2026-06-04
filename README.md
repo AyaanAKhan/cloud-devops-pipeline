@@ -1,43 +1,76 @@
 # Cloud DevOps Pipeline
 
-This repository demonstrates a simple continuous integration and continuous deployment (CI/CD) pipeline
-for containerized applications.  It includes a Dockerfile for building a container image and a
-GitHub Actions workflow that builds, tests, and deploys the image to an AWS EC2 instance.
+A Docker and GitHub Actions project that demonstrates how to package, test, and prepare a small web service for cloud deployment.
 
-## Features
+This repository is intentionally simple, but it shows the core DevOps habits recruiters look for: containerization, repeatable local setup, automated CI, and cloud deployment planning.
 
-- **Dockerized application**: A basic Python web service that returns a greeting.
-- **GitHub Actions workflow**: Automatically build and test the Docker image on every push.
-- **Deployment step**: Example commands to deploy the container to an EC2 instance (customize as needed).
+## What It Demonstrates
 
-## Folder Structure
+- Dockerized application setup
+- GitHub Actions workflow for build and test automation
+- CI/CD project structure
+- Cloud deployment direction for AWS EC2, ECS, or ECR
+- Practical understanding of how code moves from local development to a deployable service
 
-```
-github_projects/cloud-devops-pipeline/
-├── README.md             # Overview and instructions
-├── app.py                # Sample Python application
-├── Dockerfile            # Container build instructions
+## Tech Stack
+
+| Area | Tools |
+|---|---|
+| App | Python web service |
+| Containerization | Docker |
+| CI/CD | GitHub Actions |
+| Cloud Target | AWS EC2, ECS, or ECR |
+
+## Repository Structure
+
+```text
+.
+├── README.md
+├── app.py
+├── Dockerfile
 └── .github/
     └── workflows/
-        └── ci.yml        # GitHub Actions workflow
+        └── ci.yml
 ```
 
-## Running Locally
-
-To build and run the container locally:
+## Run Locally
 
 ```bash
-docker build -t devops-sample .
-docker run -p 8080:8080 devops-sample
+docker build -t cloud-devops-pipeline .
+docker run -p 8080:8080 cloud-devops-pipeline
+```
 
-# In another terminal
+Then test the service:
+
+```bash
 curl http://localhost:8080
 ```
 
-You should see a greeting message returned from the server.
+## CI/CD Flow
 
-## GitHub Actions
+```text
+Push to GitHub
+      |
+      v
+GitHub Actions
+      |
+      +--> Build Docker image
+      +--> Run tests or validation checks
+      +--> Prepare deployment step
+      |
+      v
+Cloud deployment target
+```
 
-The workflow defined in `.github/workflows/ci.yml` builds the Docker image, runs basic tests, and
-optionally deploys the image.  Customize the `deploy` job according to your environment (e.g.,
-upload the image to Amazon Elastic Container Registry and update an ECS or EC2 deployment).
+## Recruiter Notes
+
+This project shows backend deployment awareness, not just coding. It is useful for SWE, cloud, platform, and DevOps adjacent internships because it demonstrates Docker, CI, and cloud pipeline fundamentals.
+
+## Future Improvements
+
+- Add automated unit tests
+- Push images to Amazon ECR
+- Deploy to ECS or EC2 automatically
+- Add environment specific configuration
+- Add health check endpoint
+- Add infrastructure as code with Terraform
