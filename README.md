@@ -1,5 +1,7 @@
 # Cloud DevOps Pipeline
 
+![Cloud DevOps Pipeline Preview](docs/screenshots/devops-pipeline-preview.svg)
+
 A Docker and GitHub Actions project that demonstrates how to package, test, and prepare a small web service for cloud deployment.
 
 This repository is intentionally simple, but it shows the core DevOps habits recruiters look for: containerization, repeatable local setup, automated CI, and cloud deployment planning.
